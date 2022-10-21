@@ -52,13 +52,13 @@ bbox = st_bbox(dc)
 #
 ggplot()+
   geom_sf(data = dc, fill = "black", color = "white"
-          , size = .5) +
+          , size = .25) +
   with_outer_glow(geom_sf(data = df_group, aes(geometry = st_jitter(geometry))
           , color = "yellow"
-          , alpha = .3)) +
+          , alpha = .6)) +
   with_outer_glow(geom_sf(data = df_group2, aes(geometry = st_jitter(geometry))
           , col = "red"
-          , alpha = .3)) +
+          , alpha = .4)) +
   coord_sf(xlim = c(bbox[[1]], bbox[[3]])
                   , ylim = c(bbox[[2]], bbox[[4]])) +
   theme_void()
