@@ -351,9 +351,13 @@ p1_plus <- p1 + annotate(geom = "text"
              , size = 16)
 patch <- p_plus + p1_plus # n = 100
 
+#subtitle object to put in the plot_annotation below
+subtitle <- ggtext::element_markdown()
+  
 showtext_auto()
 patch + plot_annotation(
   title = "Day 1: DC's top 100 Capital Bikeshare stations, September 2022"
+  , subtitle = subtitle
   , caption = "Data: Capital Bikeshare, https://s3.amazonaws.com/capitalbikeshare-data/index.html \nAuthor: @BCalhoon7 \n #30DayMapChallenge"
 ) & theme(plot.title = element_text(size = 44
                                     , face = "bold"
@@ -361,6 +365,4 @@ patch + plot_annotation(
           , plot.title.position = "panel"
           , plot.caption = element_text(size = 16
                                         , family = "amatic-sc")
-)
-#testing out with some additional size
-
+) 
