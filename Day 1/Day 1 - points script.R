@@ -23,12 +23,12 @@ carto_colors <- rcartocolor::carto_pal(12, "Vivid")
 colors <- c(carto_colors[[8]], carto_colors[[11]])
 #read in bikeshare data. 
 #accessed here: https://s3.amazonaws.com/capitalbikeshare-data/index.html
-df <- read_csv("bikeshare data sept 2022.csv")
+df <- read_csv("Day 1/bikeshare data sept 2022.csv")
 
 
 #read in the administrative boundaries
 #accessed here: https://opendata.dc.gov/datasets/DCGIS::advisory-neighborhood-commissions-from-2023/about
-dc <- st_read("DC/Single_Member_District_from_2023.shp")
+dc <- st_read("Day 1/DC/Single_Member_District_from_2023.shp")
 
 #remove any missing coordinates
 #564 missing end_lat and end_lng coordinates
@@ -38,7 +38,16 @@ df <- df %>%
          , !is.na(start_lat)
          , !is.na(start_lng)) 
 
+df$started_at <- df$started_at %>% 
+  mdy_hm()
 
+#Eliminate weekends
+df$weekdays <- df$started_at %>% 
+  weekdays()
+
+df <- df[!grepl("Saturday", df$weekdays) &
+            !grepl("Sunday", df$weekdays),] 
+         
 #make some geometry list columns
 df1 <- df %>% 
   st_as_sf(coords = c("start_lng", "start_lat")
@@ -50,11 +59,6 @@ df2 <- df %>%
 
 #create a bbox to use in coord_sf below.
 bbox = st_bbox(dc)
-
-#filter just for morning rush hour - 6 am - 9 am ------
-
-df$started_at <- df$started_at %>% 
-  mdy_hm()
 
 df <- df %>% 
   mutate(time = format(started_at, format = "%H:%M:%S"))
@@ -77,10 +81,6 @@ df_morn2 <- df_morn2 %>%
            , crs = 4326)
 
 #filter just for evening rush hours - 4 pm - 7 pm on 9/23/22------
-
-#make the start_at column a datetime value
-df$started_at <- df$started_at %>% 
-  mdy_hm()
 
 #create columns for time and day
 df <- df %>% 
@@ -260,6 +260,7 @@ plot <- patch + plot_annotation(
           , plot.background = element_rect(fill = "#d6bd8d")
 ) 
 
+plot
 ggsave(plot = plot
        , filename = "./Day 1/DC bike commuters.png"
        , height = 4
