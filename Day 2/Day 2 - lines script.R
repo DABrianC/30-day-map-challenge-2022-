@@ -157,14 +157,36 @@ ways_centrality = ways_sfn |>
 
 
 ####----The start of my own bike route map!!!---
+#accessed here: https://s3.amazonaws.com/capitalbikeshare-data/index.html
+df <- read_csv("./Day 1/bikeshare data sept 2022.csv")
+
+dc <- osmdata::getbb("Washington DC", format_out = "sf_polygon", limit = 1)
+
+
 df <- df %>% 
   filter(!is.na(end_lat)
          , !is.na(end_lng)
          , !is.na(start_lat)
          , !is.na(start_lng)) 
 
-glimpse(df)
-df$o <- df %>%
+
+df$started_at <- df$started_at %>% 
+  mdy_hm()     
+
+df <- df %>% 
+  mutate(time = format(started_at, format = "%H:%M:%S")
+         , date = format(started_at, format = "%Y-%m-%d")
+         , day = weekdays(started_at))
+
+df1 <- df %>% 
+  filter(grepl("Saturday", day)
+         | grepl("Sunday", day))
+
+glimpse(df1)
+
+
+
+df$o <- df1 %>%
   sf::st_as_sf(coords = c("start_lng", "start_lat")
                             , crs = 4326)
 
