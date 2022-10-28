@@ -29,6 +29,11 @@ df <- read_csv("Day 1/bikeshare data sept 2022.csv")
 #read in the administrative boundaries
 #accessed here: https://opendata.dc.gov/datasets/DCGIS::advisory-neighborhood-commissions-from-2023/about
 dc <- st_read("Day 1/DC/Single_Member_District_from_2023.shp")
+boundary <- st_read("Day 1/DC/Washington_DC_Boundary.shp")
+
+#read in the roads
+#https://opendata.dc.gov/datasets/e8299c86b4014f109fedd7e95ae20d52/explore?location=38.893605%2C-77.019147%2C12.00
+roads <- st_read("Day 1/DC/Roads.shp")
 
 #remove any missing coordinates
 #564 missing end_lat and end_lng coordinates
@@ -41,6 +46,12 @@ df <- df %>%
 df$started_at <- df$started_at %>% 
   mdy_hm()
 
+#create columns for time and day
+df <- df %>% 
+  mutate(time = format(started_at, format = "%H:%M:%S")
+         , day = format(started_at, format = "%Y-%m-%d"))
+
+
 #Eliminate weekends
 df$weekdays <- df$started_at %>% 
   weekdays()
@@ -49,19 +60,10 @@ df <- df[!grepl("Saturday", df$weekdays) &
             !grepl("Sunday", df$weekdays),] 
          
 #make some geometry list columns
-df1 <- df %>% 
-  st_as_sf(coords = c("start_lng", "start_lat")
-           ,crs = 4326)
-
-df2 <- df %>% 
-  st_as_sf(coords = c("end_lng", "end_lat")
-           , crs = 4326)
 
 #create a bbox to use in coord_sf below.
-bbox = st_bbox(dc)
+bbox = st_bbox(boundary)
 
-df <- df %>% 
-  mutate(time = format(started_at, format = "%H:%M:%S"))
 
 df_sf <- df %>% 
   st_as_sf(coords = c("start_lng", "start_lat")
@@ -71,30 +73,15 @@ df_sf2 <- df %>%
   st_as_sf(coords = c("end_lng", "end_lat")
            , crs = 4326)
 
+#filter for morning rides
 df_morn <- df_sf %>% 
   filter(time >= "06:00:00" & time <= "09:00:00")
 
-df_morn2 <- left_join(df_morn, df, by = "ride_id")
+#df_morn2 <- left_join(df_morn, df, by = "ride_id")
 
-df_morn2 <- df_morn2 %>% 
-  st_as_sf(coors = c("end_lng", "end_lat")
-           , crs = 4326)
-
-#filter just for evening rush hours - 4 pm - 7 pm on 9/23/22------
-
-#create columns for time and day
-df <- df %>% 
-  mutate(time = format(started_at, format = "%H:%M:%S")
-         , day = format(started_at, format = "%Y-%m-%d"))
-
-#create a geometry column out of the lng and lat columns
-df_sf <- df %>% 
-  st_as_sf(coords = c("start_lng", "start_lat")
-           ,crs = 4326)
-
-#filter for just morning rides
-df_morn <- df_sf %>% 
-  filter(time >= "06:00:00" & time <= "09:00:00")
+#df_morn2 <- df_morn %>% 
+ # st_as_sf(coors = c("end_lng", "end_lat")
+  #         , crs = 4326)
 
 #group by bike station and avg. rides starting there in the morning
 df_morn2 <- df_morn %>% 
@@ -140,7 +127,8 @@ df_morn_end2 <- df_morn_end %>%
   slice_head(n = 100) #taking only the top 100 stations after averaging by day
 
 p <- ggplot()+
-  geom_sf(data = dc, fill = "black", color = "white"
+  #geom_sf(data = boundary, fill = "black") +
+  geom_sf(data = roads, color = "black"
           , size = .25) +
   with_outer_glow(geom_sf(data = df_morn2, aes(geometry = st_jitter(geometry))
                           , color = colors[[1]]

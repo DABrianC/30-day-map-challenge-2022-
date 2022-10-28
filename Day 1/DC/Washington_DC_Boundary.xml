@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8"?><metadata>
+    <idinfo>
+        <citation>
+            <citeinfo>
+                <origin/>
+                <pubdate>20130704</pubdate>
+                <title>Washington DC Boundary</title>
+                <geoform>vector digital data</geoform>
+                <pubinfo>
+                    <publish>DC GIS</publish>
+                </pubinfo>
+                <lworkcit>
+                    <citeinfo>
+                        <origin/>
+                        <title>DC Geographic Information System</title>
+                        <geoform>vector digital data</geoform>
+                    </citeinfo>
+                </lworkcit>
+            </citeinfo>
+        </citation>
+        <descript>
+            <abstract>District of Columbia boundary. The dataset is a polygon representing the District of Columbia boundary, created as part of the DC Geographic Information System (DC GIS) for the D.C. Office of the Chief Technology Officer (OCTO) and participating D.C. government agencies. The boundary was identified from public records and heads-up digitized using a combination of the 1995 orthophotographs, planimetric roads features, and the USGS digital raster graphic quad sheets, and 1999 planimetrics for the Potomac River boundary.Also see the District's Boundary Stone markers.</abstract>
+            <purpose>This data is used for the planning and management of Washington, D.C. by local government agencies.</purpose>
+        </descript>
+        <timeperd>
+            <timeinfo>
+                <sngdate>
+                    <caldate>20130704</caldate>
+                </sngdate>
+            </timeinfo>
+            <current>publication date</current>
+        </timeperd>
+        <status>
+            <progress>Complete</progress>
+            <update>As needed</update>
+        </status>
+        <spdom>
+            <bounding>
+                <westbc>-77.119896</westbc>
+                <eastbc>-76.909016</eastbc>
+                <northbc>38.995967</northbc>
+                <southbc>38.791582</southbc>
+            </bounding>
+        </spdom>
+        <keywords>
+            <theme>
+                <themekt>None</themekt>
+                <themekey>imageryBasemapsEarthCover</themekey>
+                <themekey>Boundary</themekey>
+                <themekey>Political Jurisdiction</themekey>
+                <themekey>Government Jurisdiction</themekey>
+                <themekey>boundary</themekey>
+            </theme>
+            <theme>
+                <themekt>ISO 19115 Topic Categories</themekt>
+                <themekey>imageryBaseMapsEarthCover</themekey>
+            </theme>
+            <place>
+                <placekt>None</placekt>
+                <placekey>District of Columbia</placekey>
+                <placekey>DCGIS</placekey>
+                <placekey>DC GIS</placekey>
+                <placekey>DC</placekey>
+                <placekey>Washington</placekey>
+                <placekey>D.C.</placekey>
+            </place>
+        </keywords>
+        <accconst>None</accconst>
+        <useconst>This work is licensed under a Creative Commons Attribution 4.0 International License.</useconst>
+        <ptcontac>
+            <cntinfo>
+                <cntorgp>
+                    <cntorg>D.C. Office of the Chief Technology Officer</cntorg>
+                    <cntper>GIS Data Coordinator</cntper>
+                </cntorgp>
+                <cntaddr>
+                    <addrtype>mailing and physical</addrtype>
+                    <address>200 I Street SE, 5th Floor</address>
+                    <city>Washington</city>
+                    <state>DC</state>
+                    <postal>20003</postal>
+                    <country>US</country>
+                </cntaddr>
+                <cntfax>(202) 727-5660</cntfax>
+                <cntemail>dcgis@dc.gov</cntemail>
+                <hours>8:30 am - 5 pm</hours>
+            </cntinfo>
+        </ptcontac>
+        <datacred>D.C. Office of Planning</datacred>
+    </idinfo>
+    <dataqual>
+        <attracc>
+            <attraccr>Data believed to be complete and accurate as of the time period cited. Subject to change. Digital version compared with original source data for accuracy and completeness. In process of validation by source and/or responsible agency.</attraccr>
+        </attracc>
+        <logic>In process of validation by source and/or responsible agency.</logic>
+        <complete>Data believed to be complete and accurate, subject to change. Digital version compared with original source data for accuracy and completeness. In process of validation by source and/or responsible agency.</complete>
+        <posacc>
+            <horizpa>
+                <horizpar>In process of validation by source and/or responsible agency.</horizpar>
+            </horizpa>
+            <vertacc>
+                <vertaccr>N/A</vertaccr>
+            </vertacc>
+        </posacc>
+        <lineage>
+            <srcinfo>
+                <srccite>
+                    <citeinfo>
+                        <origin/>
+                        <title>Planimetric water feature</title>
+                        <othercit>Potomac River forms one boundary of the District of Columbia</othercit>
+                    </citeinfo>
+                </srccite>
+                <srcscale>1000</srcscale>
+                <typesrc>None</typesrc>
+                <srccitea>Planimetric water features</srccitea>
+                <srccontr>boundary</srccontr>
+            </srcinfo>
+            <srcinfo>
+                <srccite>
+                    <citeinfo>
+                        <origin/>
+                        <title>USGS 1:24,000 Digital raster graphic quad sheets</title>
+                    </citeinfo>
+                </srccite>
+                <srcscale>24000</srcscale>
+                <typesrc>None</typesrc>
+                <srccitea>USGS quads</srccitea>
+                <srccontr>boundaries</srccontr>
+            </srcinfo>
+            <procstep>
+                <procdesc>The boundary was identified from public records and heads-up digitized using a combination of the 1995 orthophotographs, planimetric roads features, and the USGS digital raster graphic quad sheets, and 1999 planimetrics for the Potomac River boundary. The DC boundary is defined by cornerstones and the far Potomac riverbank. It has not been resurveyed since 1965. The three corners were located on the USGS quads, and lines drawn to connect them. Those lines were intersected with the riverbank edge form the planimetric water feature. The resulting line coverage was then built as a polygon. A base ArcInfo coverage of correct line work (snapbase.e00) for all DC data was developed after the final delivery of the planimetric street centerlines. The datasets were selected from the snapbase coverage, creating coincident geography with the other DC GIS datasets. When imported into the DC GIS geodatabase the coverages shift 0.01mm since the geodatabase supports only 11 digits of precision, not double precision (16 digits). The DC Boundary was part of this base dataset. Planimetrics were created at a scale of 1:1,000. This means that a well defined feature falls within two feet of true position. All DC GIS data is stored and exported in Maryland State Plane coordinates NAD 83 meters.</procdesc>
+                <procdate>20010806</procdate>
+                <proccont>
+                    <cntinfo>
+                        <cntorgp>
+                            <cntorg>D.C. Office of the Chief Technology Officer</cntorg>
+                            <cntper>GIS Data Coordinator</cntper>
+                        </cntorgp>
+                        <cntaddr>
+                            <addrtype>mailing and physical</addrtype>
+                            <address>200 I Street SE, 5th Floor</address>
+                            <city>Washington</city>
+                            <state>DC</state>
+                            <postal>20001</postal>
+                            <country>US</country>
+                        </cntaddr>
+                        <cntfax>(202) 727-5660</cntfax>
+                        <cntemail>dcgis@dc.gov</cntemail>
+                        <hours>8:30 am - 5:00 pm</hours>
+                    </cntinfo>
+                </proccont>
+            </procstep>
+            <procstep>
+                <procdesc>Updated population data for the 2010 census.</procdesc>
+                <procdate>20130704</procdate>
+                <proccont>
+                    <cntinfo>
+                        <cntorgp>
+                            <cntorg>OCTO</cntorg>
+                        </cntorgp>
+                    </cntinfo>
+                </proccont>
+            </procstep>
+        </lineage>
+    </dataqual>
+    <spdoinfo>
+        <direct>Vector</direct>
+        <ptvctinf>
+            <sdtsterm>
+                <sdtstype>GT-polygon composed of chains</sdtstype>
+                <ptvctcnt>1</ptvctcnt>
+            </sdtsterm>
+        </ptvctinf>
+    </spdoinfo>
+    <eainfo>
+        <detailed>
+            <enttyp>
+                <enttypl>DCGIS.DCBndyPly</enttypl>
+            </enttyp>
+            <attr>
+                <attrlabl>Shape</attrlabl>
+                <attrdef>Feature geometry.</attrdef>
+                <attrdefs>ESRI</attrdefs>
+                <attrdomv>
+                              
+                    <udom>Coordinates defining the features.</udom>
+                            
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>CITY_FIPS</attrlabl>
+                <attrdef>City FIPS code</attrdef>
+            </attr>
+            <attr>
+                <attrlabl>CITY_NAME</attrlabl>
+                <attrdef>City name</attrdef>
+            </attr>
+            <attr>
+                <attrlabl>STATE_FIPS</attrlabl>
+                <attrdef>State FIPS code</attrdef>
+            </attr>
+            <attr>
+                <attrlabl>STATE_NAME</attrlabl>
+                <attrdef>State name</attrdef>
+            </attr>
+            <attr>
+                <attrlabl>STATE_CITY</attrlabl>
+                <attrdef>State and city name</attrdef>
+            </attr>
+            <attr>
+                <attrlabl>TWO_OR_MOR</attrlabl>
+                <attrdef>Two or more</attrdef>
+            </attr>
+            <attr>
+                <attrlabl>WEB_URL</attrlabl>
+                <attrdef>Web link url</attrdef>
+            </attr>
+            <attr>
+                <attrlabl>AREAKM</attrlabl>
+                <attrdef>Area in kilometers</attrdef>
+            </attr>
+            <attr>
+                <attrlabl>AREAMILES</attrlabl>
+                <attrdef>Area in miles</attrdef>
+                <attrdefs>Esri</attrdefs>
+                <attrdomv>
+                              
+                    <udom>Coordinates defining the features.</udom>
+                            
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>SHAPE</attrlabl>
+                <attrdef>Feature geometry.</attrdef>
+                <attrdefs>ESRI</attrdefs>
+                <attrdomv>
+                              
+                    <udom>Coordinates defining the features.</udom>
+                            
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>AGE_0_4</attrlabl>
+                <attrdef>Total Population Age 0 - 4</attrdef>
+            </attr>
+            <attr>
+                <attrlabl>AGE_5_17</attrlabl>
+                <attrdef>Total Population Age 5 - 17</attrdef>
+            </attr>
+            <attr>
+                <attrlabl>AGE_18_24</attrlabl>
+                <attrdef>Total Population Age 18 - 24</attrdef>
+            </attr>
+            <attr>
+                <attrlabl>AGE_25_34</attrlabl>
+                <attrdef>Total Population Age 25 - 34</attrdef>
+            </attr>
+            <attr>
+                <attrlabl>AGE_35_44</attrlabl>
+                <attrdef>Total Population Age 35 - 44</attrdef>
+            </attr>
+            <attr>
+                <attrlabl>AGE_45_54</attrlabl>
+                <attrdef>Total Population Age 45- 54</attrdef>
+            </attr>
+            <attr>
+                <attrlabl>AGE_55_64</attrlabl>
+                <attrdef>Total Population Age 55 - 64</attrdef>
+            </attr>
+            <attr>
+                <attrlabl>AGE_65_</attrlabl>
+                <attrdef>Total Population Age 65+</attrdef>
+            </attr>
+            <attr>
+                <attrlabl>TOTAL_YOUT</attrlabl>
+                <attrdef>Total youth population</attrdef>
+            </attr>
+            <attr>
+                <attrlabl>WHITE</attrlabl>
+                <attrdef>Total youth population - White</attrdef>
+            </attr>
+            <attr>
+                <attrlabl>BLACK_AFRI</attrlabl>
+                <attrdef>Total youth population - Black</attrdef>
+            </attr>
+            <attr>
+                <attrlabl>AMER_INDIA</attrlabl>
+                <attrdef>Total youth population - American Indian</attrdef>
+            </attr>
+            <attr>
+                <attrlabl>ASIAN</attrlabl>
+                <attrdef>Total youth population - Asian</attrdef>
+            </attr>
+            <attr>
+                <attrlabl>HAWIAN_PAC</attrlabl>
+                <attrdef>Total youth population - Hawaiian/Pacific Islander</attrdef>
+            </attr>
+            <attr>
+                <attrlabl>HISPANIC</attrlabl>
+                <attrdef>Total youth population - hispanic</attrdef>
+                <attrdefs>Esri</attrdefs>
+                <attrdomv>
+                              
+                    <udom>Sequential unique whole numbers that are automatically generated.</udom>
+                            
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>OBJECTID</attrlabl>
+                <attrdef>Internal feature number.</attrdef>
+                <attrdefs>ESRI</attrdefs>
+                <attrdomv>
+                              
+                    <udom>Sequential unique whole numbers that are automatically generated.</udom>
+                            
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>CAPITAL</attrlabl>
+                <attrdef>Capital</attrdef>
+            </attr>
+            <attr>
+                <attrlabl>OTHER</attrlabl>
+                <attrdef>Total youth population - other</attrdef>
+                <attrdefs>Esri</attrdefs>
+                <attrdomv>
+                              
+                    <udom>Positive real numbers that are automatically generated.</udom>
+                            
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>SHAPE.AREA</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>POP</attrlabl>
+                <attrdef>Length of feature in internal units.</attrdef>
+                <attrdefs>Esri</attrdefs>
+                <attrdomv>
+                              
+                    <udom>Positive real numbers that are automatically generated.</udom>
+                            
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>SHAPE.LEN</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>GIS_ID</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>GlobalID</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>Creator</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>Created</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>Editor</attrlabl>
+            </attr>
+            <attr>
+                <attrlabl>Edited</attrlabl>
+            </attr>
+        </detailed>
+    </eainfo>
+    <distinfo>
+        <distrib>
+            <cntinfo>
+                <cntorgp>
+                    <cntorg>D.C. Office of the Chief Technology Officer</cntorg>
+                    <cntper>GIS Data Coordinator</cntper>
+                </cntorgp>
+                <cntaddr>
+                    <addrtype>mailing and physical</addrtype>
+                    <address>200 I Street SE, 5th Floor</address>
+                    <city>Washington</city>
+                    <state>DC</state>
+                    <postal>20003</postal>
+                    <country>US</country>
+                </cntaddr>
+                <cntfax>(202) 727-5660</cntfax>
+                <cntemail>dcgis@dc.gov</cntemail>
+                <hours>8:30 am - 5 pm</hours>
+            </cntinfo>
+        </distrib>
+        <distliab>See access and use constraints information.</distliab>
+        <custom>DC datasets can be downloaded from "http://opendata.dc.gov".</custom>
+    </distinfo>
+    <metainfo>
+        <metd>20171030</metd>
+        <metrd>01/07/04</metrd>
+        <metc>
+            <cntinfo>
+                <cntorgp>
+                    <cntorg>D.C. Office of the Chief Technology Officer</cntorg>
+                    <cntper>GIS Data Coordinator</cntper>
+                </cntorgp>
+                <cntaddr>
+                    <addrtype>mailing and physical</addrtype>
+                    <address>200 I Street SE, 5th Floor</address>
+                    <city>Washington</city>
+                    <state>DC</state>
+                    <postal>20003</postal>
+                    <country>US</country>
+                </cntaddr>
+                <cntfax>(202) 727-5660</cntfax>
+                <cntemail>dcgis@dc.gov</cntemail>
+                <hours>8:30 am - 5 pm</hours>
+            </cntinfo>
+        </metc>
+        <metstdn>FGDC Content Standard for Digital Geospatial Metadata</metstdn>
+        <metstdv>FGDC-STD-001-1998</metstdv>
+        <mettc>local time</mettc>
+    </metainfo>
+</metadata>
