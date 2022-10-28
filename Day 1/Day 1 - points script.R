@@ -109,7 +109,8 @@ df_morn2 <- df_morn %>%
   summarize(count = n()) %>% 
   ungroup() %>% 
   group_by(start_station_name) %>% 
-  summarize(avg = mean(count)) %>% 
+  summarize(avg = mean(count)) %>%
+  arrange(desc(avg)) %>% 
   slice_head(n = 100) #taking only the top 100 stations after averaging by day
 
 #Then, repeat for the end rides but have to delete missing lng and lat
@@ -135,6 +136,7 @@ df_morn_end2 <- df_morn_end %>%
   ungroup() %>% 
   group_by(end_station_name) %>% 
   summarize(avg = mean(count)) %>% 
+  arrange(desc(avg)) %>% 
   slice_head(n = 100) #taking only the top 100 stations after averaging by day
 
 p <- ggplot()+
@@ -189,6 +191,7 @@ df_even2 <- df_even %>%
   ungroup() %>% 
   group_by(start_station_name) %>% 
   summarize(avg = mean(count)) %>% 
+  arrange(desc(avg)) %>% 
   slice_head(n = 100) #taking only the top 100
 
 #Then, repeat for the end rides but have to delete missing lng and lat
@@ -214,6 +217,7 @@ df_even_end2 <- df_even_end %>%
   ungroup() %>% 
   group_by(end_station_name) %>% 
   summarize(avg = mean(count)) %>% 
+  arrange(desc(avg)) %>% 
   slice_head(n = 100) #take only the top 100
 
 #plot the evening cycle stations
@@ -242,7 +246,7 @@ p1_plus <- p1 + annotate(geom = "text"
 patch <- p_plus + p1_plus # n = 100
 
 #subtitle object to put in the plot_annotation below
-subtitle <- "Capital Bikeshare commuters frequent the same <span style = 'color:#2F8AC4'>**start stations**</span> and <span style = 'color:#CC3A8E'>**end stations**</span>."
+subtitle <- "Capital Bikeshare weekday commuters <span style = 'color:#2F8AC4'>**start stations**</span> and <span style = 'color:#CC3A8E'>**end stations**</span>."
   
 showtext_auto()
 plot <- patch + plot_annotation(
@@ -260,7 +264,6 @@ plot <- patch + plot_annotation(
           , plot.background = element_rect(fill = "#d6bd8d")
 ) 
 
-plot
 ggsave(plot = plot
        , filename = "./Day 1/DC bike commuters.png"
        , height = 4
