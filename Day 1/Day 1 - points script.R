@@ -127,8 +127,7 @@ df_morn_end2 <- df_morn_end %>%
   slice_head(n = 100) #taking only the top 100 stations after averaging by day
 
 p <- ggplot()+
-  #geom_sf(data = boundary, fill = "black") +
-  geom_sf(data = roads, color = "black"
+  geom_sf(data = dc, color = "white", fill = "black"
           , size = .25) +
   with_outer_glow(geom_sf(data = df_morn2, aes(geometry = st_jitter(geometry))
                           , color = colors[[1]]
@@ -234,20 +233,20 @@ p1_plus <- p1 + annotate(geom = "text"
 patch <- p_plus + p1_plus # n = 100
 
 #subtitle object to put in the plot_annotation below
-subtitle <- "Capital Bikeshare weekday commuters <span style = 'color:#2F8AC4'>**start stations**</span> and <span style = 'color:#CC3A8E'>**end stations**</span>."
+subtitle <- "Capital Bikeshare weekday commuters' <span style = 'color:#2F8AC4'>**start stations**</span> and <span style = 'color:#CC3A8E'>**end stations**</span>."
   
 showtext_auto()
 plot <- patch + plot_annotation(
   title = "Day 1: DC's top 100 Capital Bikeshare stations, September 2022"
   , subtitle = subtitle
-  , caption = "Data: Capital Bikeshare, https://s3.amazonaws.com/capitalbikeshare-data/index.html \nAuthor: @BCalhoon7, #30DayMapChallenge"
+  , caption = "Data: Capital Bikeshare & Open Data DC \nAuthor: @BCalhoon7, #30DayMapChallenge"
 ) & theme(plot.title = ggtext::element_markdown(size = 44
                                     , face = "bold"
                                     , family = "amatic-sc")
           , plot.subtitle = ggtext::element_markdown(size = 28
                                          , family = "amatic-sc")
           , plot.title.position = "panel"
-          , plot.caption = element_text(size = 16
+          , plot.caption = element_text(size = 18
                                         , family = "amatic-sc")
           , plot.background = element_rect(fill = "#d6bd8d")
 ) 
