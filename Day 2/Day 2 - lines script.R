@@ -38,6 +38,23 @@ df <- df %>%
          , !is.na(start_lat)
          , !is.na(start_lng)) 
 
+df$started_at <- df$started_at %>% 
+  mdy_hm()
+
+
+df <- df %>% 
+  mutate(time = format(started_at, format = "%H:%M:%S")
+         , day = format(started_at, format = "%Y-%m-%d"))
+
+
+#Eliminate weekdays
+df$weekdays <- df$started_at %>% 
+  weekdays()
+
+df <- df[grepl("Saturday", df$weekdays) |
+           grepl("Sunday", df$weekdays),] 
+
+
 zones <- df |>
   select(o = start_station_id
          , d = end_station_id
@@ -49,33 +66,42 @@ zones <- df |>
          , !is.na(d)
          , o != d)
 
-zones_d <- zones |>
+dest <- zones |>
   group_by(o, d) |>
   summarize(count = n())
 
-zones_od <- inner_join(zones, zones_d) |>
-  filter(!is.na(o)
-         , !is.na(d)) |>
-  arrange(desc(count))
+zones_dest <- left_join(dest, zones)
 
 zone_start <- zones |>
-  select(o, start_lng, start_lat) |>
-  st_as_sf(coords = c("start_lng", "start_lat"), crs = 4326)
+  select(o, d, start_lng, start_lat) |>
+  group_by(o,d, start_lng,start_lat) |>
+  count() |>          
+  st_as_sf(coords = c("start_lng", "start_lat"), crs = 4326) |>
+  select(o, n, geometry) |>
+  arrange(desc(n)) 
+
+zone1 <- zone_start[1:500,]
 
 zone_end <- zones |>
-  select(d, end_lng, end_lat) |>
-  st_as_sf(coords = c("end_lng", "end_lat"), crs = 4326)
+  select(o, d, end_lng, end_lat) |>
+  group_by(o,d, end_lng,end_lat) |>
+  count() |>          
+  st_as_sf(coords = c("end_lng", "end_lat"), crs = 4326) |>
+  select(d, n, geometry) |>
+  arrange(desc(n))
 
-zone1 <- zone_start[1:100,]
-zone2 <- zone_end[1:100,]
+zone2 <- zone_end[1:500,]
 
-
-
+#THis works
 lines <- stplanr::route(from = zone1
                         , to = zone2
                         , route_fun = route_osrm
                         , osrm.profile = "bike")
 
+
+mapview::mapview(st_geometry(lines))
+
+tmap_view("plot")
 
 ###Example---Chapter 13 of Geocompr
 
