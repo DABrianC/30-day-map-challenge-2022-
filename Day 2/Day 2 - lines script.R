@@ -32,7 +32,49 @@ colors <- c(carto_colors[[8]], carto_colors[[11]])
 #accessed here: https://s3.amazonaws.com/capitalbikeshare-data/index.html
 df <- read_csv("./Day 1/bikeshare data sept 2022.csv")
 
-dc <- osmdata::getbb("Washington DC", format_out = "sf_polygon", limit = 1)
+df <- df %>% 
+  filter(!is.na(end_lat)
+         , !is.na(end_lng)
+         , !is.na(start_lat)
+         , !is.na(start_lng)) 
+
+zones <- df |>
+  select(o = start_station_id
+         , d = end_station_id
+         , start_lng
+         , start_lat
+         , end_lng
+         , end_lat) |>
+  filter(!is.na(o)
+         , !is.na(d)
+         , o != d)
+
+zones_d <- zones |>
+  group_by(o, d) |>
+  summarize(count = n())
+
+zones_od <- inner_join(zones, zones_d) |>
+  filter(!is.na(o)
+         , !is.na(d)) |>
+  arrange(desc(count))
+
+zone_start <- zones |>
+  select(o, start_lng, start_lat) |>
+  st_as_sf(coords = c("start_lng", "start_lat"), crs = 4326)
+
+zone_end <- zones |>
+  select(d, end_lng, end_lat) |>
+  st_as_sf(coords = c("end_lng", "end_lat"), crs = 4326)
+
+zone1 <- zone_start[1:100,]
+zone2 <- zone_end[1:100,]
+
+
+
+lines <- stplanr::route(from = zone1
+                        , to = zone2
+                        , route_fun = route_osrm
+                        , osrm.profile = "bike")
 
 
 ###Example---Chapter 13 of Geocompr
