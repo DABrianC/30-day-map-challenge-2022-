@@ -106,7 +106,7 @@ p <- ggplot() +
           , color = "#E81B39"
           , alpha = .4
           , size = .7))+
-  labs(title = "<span style = 'color:#E81B39'>What routes do weekend cyclists in DC frequent?</span>"
+  labs(title = "<span style = 'color:#E81B39'>Day 2:What routes do weekend cyclists in DC frequent?</span>"
        , subtitle = "<span style = 'color:#E81B39'>Weekends in September 2022</span>"
        , caption = "<span style = 'color:#E81B39'>Data: Capital Bikeshare; OpenStreetMap; Open Source Routing Machine <br>Visualized by: @Bcalhoon7 #30DayMapChallenge<span style = 'color:#E81B39'>")+
   theme_void() + 
@@ -128,4 +128,11 @@ ggsave(plot = p
        , filename = "Day 2/cycle routes.png"
        , height = 5.9
        , width = 4
+       , unit = "in")
+
+#small version for readme
+ggsave(plot = p
+       , filename = "Day 2/cycle routes readme.png"
+       , height = 2.45
+       , width = 2
        , unit = "in")
