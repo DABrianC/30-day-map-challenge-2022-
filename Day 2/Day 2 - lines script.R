@@ -113,9 +113,11 @@ b <- st_read("Day 2/lines.shp")
 class(b)
 
 ggplot() +
-  geom_sf(data = dc, fill = "black", color = "black") +
-  geom_sf(data = b, aes(geometry = st_geometry(geometry)
-                        , color = "yellow"))
+  with_outer_glow(geom_sf(data = boundary, fill = "#FFFFFF", color = "blue")) +
+  with_outer_glow(geom_sf(data = b, aes(geometry = st_geometry(geometry)
+                        , color = "#E81B39"))) +
+  theme_void() + 
+  theme(legend.position = "none")
 
 mapview::mapview(st_geometry(b))
 
