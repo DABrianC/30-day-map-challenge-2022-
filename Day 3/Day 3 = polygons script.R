@@ -48,7 +48,7 @@ p <- ggplot() +
     , colors=met.brewer("Hokusai2")
     , breaks = c(25, 250)
     , labels = c("Less", "More")) +
-  labs(title = "Does your DC neighborhood have enough bike lanes?"
+  labs(title = "Day 3: Does your DC neighborhood have enough bike lanes?"
        , subtitle = "Official bike lanes in grey"
        , caption = "Data: Open Data DC\nVisualized by: @bcalhoon7 #30DayMapChallenge") +
   theme(plot.title.position = "plot"
