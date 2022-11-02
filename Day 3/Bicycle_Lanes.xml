@@ -1,0 +1,1033 @@
+<?xml version="1.0" encoding="UTF-8"?><metadata>
+    <idinfo>
+        <citation>
+            <citeinfo>
+                <origin/>
+                <pubdate>20210713</pubdate>
+                <title>Bicycle Lanes</title>
+                <geoform>vector digital data</geoform>
+            </citeinfo>
+        </citation>
+        <descript>
+            <abstract>For a city, street blocks are a very common way in which to organize and relate asset types such as bicycle lanes. The bicycle lane layer is an extract of its parent layer Roadway Blocks. The bicycle lane layer provides locations for a variety of different types of lane types throughout Washington, DC. For more information please visit DDOT's wiki page.</abstract>
+            <purpose>The bicycle lane layer provides locations for a variety of different types of lane types throughout Washington, DC.</purpose>
+            <supplinf>https://wiki.ddot.dc.gov/display/GIS/DDOT%27s+Transportation+Data+Products</supplinf>
+        </descript>
+        <status>
+            <progress>In work</progress>
+            <update>Weekly</update>
+        </status>
+        <spdom>
+            <bounding>
+                <westbc>-77.11669999999869</westbc>
+                <eastbc>-76.90939999999871</eastbc>
+                <northbc>38.99529999999933</northbc>
+                <southbc>38.793199999999345</southbc>
+            </bounding>
+        </spdom>
+        <keywords>
+            <theme>
+                <themekt>None</themekt>
+                <themekey>transportation</themekey>
+                <themekey>street block</themekey>
+            </theme>
+            <theme>
+                <themekt>ISO 19115 Topic Categories</themekt>
+                <themekey>transportation</themekey>
+            </theme>
+            <place>
+                <placekt>None</placekt>
+                <placekey>Washington D.C.</placekey>
+                <placekey>DC</placekey>
+                <placekey>District of Columbia</placekey>
+            </place>
+        </keywords>
+        <accconst>Other Constraints</accconst>
+        <useconst>This work is licensed under a Creative Commons Attribution 4.0 International License.</useconst>
+        <ptcontac>
+            <cntinfo>
+                <cntorgp>
+                    <cntorg>District Department of Transportation</cntorg>
+                </cntorgp>
+                <cntaddr>
+                    <addrtype>unknown</addrtype>
+                    <address>250 M Street, SE</address>
+                    <city>Washington</city>
+                    <state>DC</state>
+                    <postal>20003</postal>
+                </cntaddr>
+                <cntvoice>(202) 673-6813</cntvoice>
+                <cntfax>(202) 671-0650</cntfax>
+                <cntemail>ddot@dc.gov</cntemail>
+                <hours>8:30 am - 5:00 pm</hours>
+            </cntinfo>
+        </ptcontac>
+        <ptcontac>
+            <cntinfo>
+                <cntorgp>
+                    <cntorg>Office of the Chief Technology Officer</cntorg>
+                </cntorgp>
+                <cntpos>GIS Data Coordinator</cntpos>
+                <cntaddr>
+                    <addrtype>mailing and physical</addrtype>
+                    <address>200 I Street SE, 5th Floor</address>
+                    <city>Washington</city>
+                    <state>DC</state>
+                    <postal>20003</postal>
+                </cntaddr>
+                <cntvoice>(202) 727-2277</cntvoice>
+                <cntfax>(202) 727-5660</cntfax>
+                <cntemail>dcgis@dc.gov</cntemail>
+                <hours>8:30 am - 5:00 pm</hours>
+            </cntinfo>
+        </ptcontac>
+        <ptcontac>
+            <cntinfo>
+                <cntorgp>
+                    <cntorg>Office of the Chief Technology Officer</cntorg>
+                </cntorgp>
+                <cntpos>GIS Data Coordinator</cntpos>
+                <cntaddr>
+                    <addrtype>mailing and physical</addrtype>
+                    <address>200 I Street SE, 5th Floor</address>
+                    <city>Washington</city>
+                    <state>DC</state>
+                    <postal>20003</postal>
+                </cntaddr>
+                <cntvoice>(202) 727-2277</cntvoice>
+                <cntfax>(202) 727-5660</cntfax>
+                <cntemail>dcgis@dc.gov</cntemail>
+                <hours>8:30 am - 5:00 pm</hours>
+            </cntinfo>
+        </ptcontac>
+        <datacred>District Department of Transportation</datacred>
+        <native>Version 6.2 (Build 9200) ; Esri ArcGIS 10.8.1.14362</native>
+    </idinfo>
+    <dataqual>
+        <lineage>
+            <procstep>
+                <procdesc>Staff updated the dataset using the latest information</procdesc>
+                <procdate>20190726</procdate>
+                <proccont>
+                    <cntinfo>
+                        <cntorgp>
+                            <cntorg>D.C. Office of the Chief Technology Officer</cntorg>
+                            <cntper>GIS Data Coordinator</cntper>
+                        </cntorgp>
+                        <cntpos>GIS Data Coordinator</cntpos>
+                        <cntaddr>
+                            <addrtype>mailing and physical</addrtype>
+                            <address>200 I Street SE, 5th Floor</address>
+                            <city>Washington</city>
+                            <state>DC</state>
+                            <postal>20003</postal>
+                        </cntaddr>
+                        <cntvoice>(202) 727-2277</cntvoice>
+                        <cntfax>(202) 727-5660</cntfax>
+                        <cntemail>dcgis@dc.gov</cntemail>
+                        <hours>8:30 am - 5:00 pm</hours>
+                    </cntinfo>
+                </proccont>
+            </procstep>
+            <procstep>
+                <procdesc>added buslane_inbound, buslane_outbound, fromstreet, tostreet, ward_id, anc_id, and smd_id fields.</procdesc>
+                <procdate>20210312</procdate>
+            </procstep>
+            <procstep>
+                <procdesc>staff added SURFACT_TYPE, PARKINGZONE_RPP, PARKINGZONE_ROP fields.</procdesc>
+                <procdate>20210706</procdate>
+            </procstep>
+        </lineage>
+    </dataqual>
+    <spdoinfo>
+        <direct>Vector</direct>
+        <ptvctinf>
+            <sdtsterm>
+                <sdtstype>String</sdtstype>
+                <ptvctcnt>13781</ptvctcnt>
+            </sdtsterm>
+        </ptvctinf>
+    </spdoinfo>
+    <eainfo>
+        <detailed>
+            <enttyp>
+                <enttypl>DCGIS.BicycleLn</enttypl>
+                <enttypd>Data attributes from DDOT Centerline dataset segmentation.</enttypd>
+                <enttypds>DDOT</enttypds>
+            </enttyp>
+            <attr>
+                <attrlabl>OBJECTID</attrlabl>
+                <attrdef>Internal feature number.</attrdef>
+                <attrdefs>Esri</attrdefs>
+                <attrdomv>
+                                        					
+                    
+                    <udom>Sequential unique whole numbers that are automatically generated.</udom>
+                                        				
+                
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>SHAPE</attrlabl>
+                <attrdef>Feature geometry.</attrdef>
+                <attrdefs>Esri</attrdefs>
+                <attrdomv>
+                                        					
+                    
+                    <udom>Coordinates defining the features.</udom>
+                                        				
+                
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>ROUTEID</attrlabl>
+                <attrdef>Unique ID of the route that this segment is on.</attrdef>
+                <attrdefs>DDOT</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>ROADTYPE</attrlabl>
+                <attrdef>The type of road or path (Street, Alley, Driveway, etc.).</attrdef>
+                <attrdefs>DDOT</attrdefs>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>1</edomv>
+                                                						
+                        
+                        <edomvd>Street</edomvd>
+                                                						
+                        
+                        <edomvds>DDOT</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>2</edomv>
+                                                						
+                        
+                        <edomvd>Service Road</edomvd>
+                                                						
+                        
+                        <edomvds>DDOT</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>3</edomv>
+                                                						
+                        
+                        <edomvd>Ramp</edomvd>
+                                                						
+                        
+                        <edomvds>DDOT</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>4</edomv>
+                                                						
+                        
+                        <edomvd>Alley</edomvd>
+                                                						
+                        
+                        <edomvds>DDOT</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>5</edomv>
+                                                						
+                        
+                        <edomvd>Driveway</edomvd>
+                                                						
+                        
+                        <edomvds>DDOT</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>6</edomv>
+                                                						
+                        
+                        <edomvd>Trail</edomvd>
+                                                						
+                        
+                        <edomvds>DDOT</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>7</edomv>
+                                                						
+                        
+                        <edomvd>Walkway</edomvd>
+                                                						
+                        
+                        <edomvds>DDOT</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>8</edomv>
+                                                						
+                        
+                        <edomvd>Streetcar</edomvd>
+                                                						
+                        
+                        <edomvds>DDOT</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>BLOCKKEY</attrlabl>
+                <attrdef>Primary key ID for the block. This is a GUID, which is derived from the BlockID value.</attrdef>
+                <attrdefs>DDOT</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>BIKELANE_PARKINGLANE_ADJACENT</attrlabl>
+                <attrdef>Is Bike lane Adjacent to Parking Lane?</attrdef>
+                <attrdefs>DDOT</attrdefs>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>OB</edomv>
+                                                						
+                        
+                        <edomvd>Outbound Side</edomvd>
+                                                						
+                        
+                        <edomvds>DDOT</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>IB</edomv>
+                                                						
+                        
+                        <edomvd>Inbound Side</edomvd>
+                                                						
+                        
+                        <edomvds>DDOT</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>BD</edomv>
+                                                						
+                        
+                        <edomvd>Both Directions (or, both sides)</edomvd>
+                                                						
+                        
+                        <edomvds>DDOT</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>BIKELANE_THROUGHLANE_ADJACENT</attrlabl>
+                <attrdef>Is Bike lane Adjacent to Travel Lane?</attrdef>
+                <attrdefs>DDOT</attrdefs>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>OB</edomv>
+                                                						
+                        
+                        <edomvd>Outbound Side</edomvd>
+                                                						
+                        
+                        <edomvds>DDOT</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>IB</edomv>
+                                                						
+                        
+                        <edomvd>Inbound Side</edomvd>
+                                                						
+                        
+                        <edomvds>DDOT</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>BD</edomv>
+                                                						
+                        
+                        <edomvd>Both Directions (or, both sides)</edomvd>
+                                                						
+                        
+                        <edomvds>DDOT</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>BIKELANE_POCKETLANE_ADJACENT</attrlabl>
+                <attrdef>Is Bike lane Adjacent to a “Pocket” turn lane?</attrdef>
+                <attrdefs>DDOT</attrdefs>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>OB</edomv>
+                                                						
+                        
+                        <edomvd>Outbound Side</edomvd>
+                                                						
+                        
+                        <edomvds>DDOT</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>IB</edomv>
+                                                						
+                        
+                        <edomvd>Inbound Side</edomvd>
+                                                						
+                        
+                        <edomvds>DDOT</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>BD</edomv>
+                                                						
+                        
+                        <edomvd>Both Directions (or, both sides)</edomvd>
+                                                						
+                        
+                        <edomvds>DDOT</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>BIKELANE_CONTRAFLOW</attrlabl>
+                <attrdef>A single protected or conventional bike lane; the difference is that the bike lane is going in the opposite direction of traffic.</attrdef>
+                <attrdefs>DDOT</attrdefs>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>OB</edomv>
+                                                						
+                        
+                        <edomvd>Outbound Side</edomvd>
+                                                						
+                        
+                        <edomvds>DDOT</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>IB</edomv>
+                                                						
+                        
+                        <edomvd>Inbound Side</edomvd>
+                                                						
+                        
+                        <edomvds>DDOT</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>BD</edomv>
+                                                						
+                        
+                        <edomvd>Both Directions (or, both sides)</edomvd>
+                                                						
+                        
+                        <edomvds>DDOT</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>BIKELANE_CONVENTIONAL</attrlabl>
+                <attrdef>Painted, on-street dedicated space for biking. Bike lanes are typically 5-feet wide with a bicycle symbol and arrow in the direction of travel. There is no physical separation between the bike lane and the adjacent parking and/or travel lane. They are usually on both sides of a two-way road, and one side on a one-way road.</attrdef>
+                <attrdefs>DDOT</attrdefs>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>OB</edomv>
+                                                						
+                        
+                        <edomvd>Outbound Side</edomvd>
+                                                						
+                        
+                        <edomvds>DDOT</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>IB</edomv>
+                                                						
+                        
+                        <edomvd>Inbound Side</edomvd>
+                                                						
+                        
+                        <edomvds>DDOT</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>BD</edomv>
+                                                						
+                        
+                        <edomvd>Both Directions (or, both sides)</edomvd>
+                                                						
+                        
+                        <edomvds>DDOT</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>BIKELANE_DUAL_PROTECTED</attrlabl>
+                <attrdef>A pair of lanes for bicycling that are physically separated from automobile parking or traffic with posts, curbs or other type of vertical barrier.</attrdef>
+                <attrdefs>DDOT</attrdefs>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>OB</edomv>
+                                                						
+                        
+                        <edomvd>Outbound Side</edomvd>
+                                                						
+                        
+                        <edomvds>DDOT</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>IB</edomv>
+                                                						
+                        
+                        <edomvd>Inbound Side</edomvd>
+                                                						
+                        
+                        <edomvds>DDOT</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>BD</edomv>
+                                                						
+                        
+                        <edomvd>Both Directions (or, both sides)</edomvd>
+                                                						
+                        
+                        <edomvds>DDOT</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>BIKELANE_DUAL_BUFFERED</attrlabl>
+                <attrdef>A pair of lanes for bicycling that are painted, on-street dedicated spaces for biking with a simple, painted buffer in between the bike lanes and the adjacent through lane.</attrdef>
+                <attrdefs>DDOT</attrdefs>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>OB</edomv>
+                                                						
+                        
+                        <edomvd>Outbound Side</edomvd>
+                                                						
+                        
+                        <edomvds>DDOT</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>IB</edomv>
+                                                						
+                        
+                        <edomvd>Inbound Side</edomvd>
+                                                						
+                        
+                        <edomvds>DDOT</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>BD</edomv>
+                                                						
+                        
+                        <edomvd>Both Directions (or, both sides)</edomvd>
+                                                						
+                        
+                        <edomvds>DDOT</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>BIKELANE_PROTECTED</attrlabl>
+                <attrdef>A dedicated space for bicycling that is physically separated from automobile parking or traffic with posts, curbs or other type of vertical barrier.</attrdef>
+                <attrdefs>DDOT</attrdefs>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>OB</edomv>
+                                                						
+                        
+                        <edomvd>Outbound Side</edomvd>
+                                                						
+                        
+                        <edomvds>DDOT</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>IB</edomv>
+                                                						
+                        
+                        <edomvd>Inbound Side</edomvd>
+                                                						
+                        
+                        <edomvds>DDOT</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>BD</edomv>
+                                                						
+                        
+                        <edomvd>Both Directions (or, both sides)</edomvd>
+                                                						
+                        
+                        <edomvds>DDOT</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>BIKELANE_BUFFERED</attrlabl>
+                <attrdef>Painted, on-street dedicated space for biking with a simple, painted buffer in between the bike lane and the adjacent through lane.</attrdef>
+                <attrdefs>DDOT</attrdefs>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>OB</edomv>
+                                                						
+                        
+                        <edomvd>Outbound Side</edomvd>
+                                                						
+                        
+                        <edomvds>DDOT</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>IB</edomv>
+                                                						
+                        
+                        <edomvd>Inbound Side</edomvd>
+                                                						
+                        
+                        <edomvds>DDOT</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+                <attrdomv>
+                                        					
+                    
+                    <edom>
+                                                						
+                        
+                        <edomv>BD</edomv>
+                                                						
+                        
+                        <edomvd>Both Directions (or, both sides)</edomvd>
+                                                						
+                        
+                        <edomvds>DDOT</edomvds>
+                                                					
+                    
+                    </edom>
+                                        				
+                
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>QUADRANT</attrlabl>
+                <attrdef>The addressing quadrant of DC (NE, NW, SE, SW) in which the segment is located.</attrdef>
+                <attrdefs>DC OCTO</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>STREETNAME</attrlabl>
+                <attrdef>Official name for the roadway segment.</attrdef>
+                <attrdefs>DC OCTO</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>STREETTYPE</attrlabl>
+                <attrdef>The street type/suffix for this street. (e.g. St, Rd, Ln, etc.)</attrdef>
+                <attrdefs>DDOT</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>BLOCK_NAME</attrlabl>
+                <attrdef>Master Address Repository (MAR) block name.</attrdef>
+                <attrdefs>DDOT</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>BLOCKID</attrlabl>
+                <attrdef>Key ID for the block; it is a concatenation of the RouteID, FromIntersectionID and ToIntersectionID.</attrdef>
+                <attrdefs>DDOT</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>TOTALBIKELANES</attrlabl>
+                <attrdef>Simple count of the total number of bike lane facilities on this segment. 
+
+If there is a conventional bike lane on one side (IB or OB), totalbikelanes = 1
+
+If there are conventional bike lane on both sides (BD), totalbikelanes = 2
+
+If there is a dual protected bike lane on one side (IB or OB), totalbikelanes = 2.  This is because, 2 lanes comprise the dual protected bike lane.
+
+If there are dual protected bike lanes on both sides (BD), totalbikelanes = 4.  This is because 2 lanes comprise each of the dual protected bike lanes.</attrdef>
+                <attrdefs>DDOT</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>TOTALBIKELANEWIDTH</attrlabl>
+                <attrdef>The total width in feet of all bike lane facilities on this segment. **Note:  excludes any painted or protected buffers.</attrdef>
+                <attrdefs>DDOT</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>WARD_ID</attrlabl>
+                <attrdef>Contains text value for DC Ward for the centerpoint of this segment.
+
+- '99' means this falls outside of DC
+- &lt;Null&gt; indicates a geometry error</attrdef>
+                <attrdefs>DDOT</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>ANC_ID</attrlabl>
+                <attrdef>Contains text value for DC's ANC for the centerpoint of this segment.
+
+- '99' means this falls outside of DC
+- &lt;Null&gt; indicates a geometry error</attrdef>
+                <attrdefs>DDOT</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>SMD_ID</attrlabl>
+                <attrdef>Contains text value for DC SMD for the centerpoint of this segment.
+
+- '99' means this falls outside of DC
+- &lt;Null&gt; indicates a geometry error</attrdef>
+                <attrdefs>DDOT</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>SE_ANNO_CAD_DATA</attrlabl>
+                <attrdef>Last time and date the information was updated.</attrdef>
+                <attrdefs>DC OCTO</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>SHAPE.LEN</attrlabl>
+            </attr>
+        </detailed>
+    </eainfo>
+    <distinfo>
+        <distrib>
+            <cntinfo>
+                <cntorgp>
+                    <cntorg>D.C. Office of the Chief Technology Officer</cntorg>
+                    <cntper>GIS Data Coordinator</cntper>
+                </cntorgp>
+                <cntpos>GIS Data Coordinator</cntpos>
+                <cntaddr>
+                    <addrtype>mailing and physical</addrtype>
+                    <address>200 I Street SE, 5th Floor</address>
+                    <city>Washington</city>
+                    <state>DC</state>
+                    <postal>20003</postal>
+                </cntaddr>
+                <cntvoice>(202) 727-2277</cntvoice>
+                <cntfax>(202) 727-5660</cntfax>
+                <cntemail>dcgis@dc.gov</cntemail>
+                <hours>8:30 am - 5:00 pm</hours>
+            </cntinfo>
+        </distrib>
+        <distliab>See access and use constraints information.</distliab>
+        <custom>DC datasets can be downloaded from "https://opendata.dc.gov".</custom>
+    </distinfo>
+    <metainfo>
+        <metd>20220902</metd>
+        <metc>
+            <cntinfo>
+                <cntorgp>
+                    <cntorg>Office of the Chief Technology Officer</cntorg>
+                </cntorgp>
+                <cntpos>GIS Data Coordinator</cntpos>
+                <cntaddr>
+                    <addrtype>mailing and physical</addrtype>
+                    <address>200 I Street SE, 5th Floor</address>
+                    <city>Washington</city>
+                    <state>DC</state>
+                    <postal>20003</postal>
+                </cntaddr>
+                <cntvoice>(202) 727-2277</cntvoice>
+                <cntfax>(202) 727-5660</cntfax>
+                <cntemail>dcgis@dc.gov</cntemail>
+                <hours>8:30 am - 5:00 pm</hours>
+            </cntinfo>
+        </metc>
+        <metstdn>FGDC Content Standard for Digital Geospatial Metadata</metstdn>
+        <metstdv>FGDC-STD-001-1998</metstdv>
+        <mettc>local time</mettc>
+    </metainfo>
+</metadata>
