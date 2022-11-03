@@ -20,7 +20,7 @@ df <- data.frame(id = seq(1, 100, 1)
 
 df_sf <- df |> st_as_sf(coords = c("x", "y"), crs = 4326)
   
-dem <- elevatr::get_elev_raster(df_sf, z = 8)
+dem <- elevatr::get_elev_raster(df_sf, z = 10)
 
 
 mat <- raster_to_matrix(dem)
@@ -33,12 +33,13 @@ hr <- h / max(c(w,h))
 
 pal <- "glacier_arches2"
 
+yellows <- c("#f1ee8e", "#e8e337", "#ffd700")
 c1 <- natparks.pals("Glacier")
 c2 <- rcartocolor::carto_pal(7, "PinkYl")
 
-colors <- c(rev(c1[2:5]), c2[2:5])
+colors <- c(rev(c1[2:4]), yellows[2:5])
 
-yellows <- c("#ffd700")
+
 rgl::rgl.close()
 mat %>%
   # This adds the coloring, we're passing in our `colors` object
@@ -48,7 +49,7 @@ mat %>%
           solid = FALSE, 
           # You might need to hone this in depending on the data resolution;
           # lower values exaggerate the height
-          z = 8,
+          z = 12,
           # Set the location of the shadow, i.e. where the floor is.
           # This is on the same scale as your data, so call `zelev` to see the
           # min/max, and set it however far below min as you like.
