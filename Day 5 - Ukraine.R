@@ -62,7 +62,7 @@ mat %>%
           background = "white") 
 
 # Use this to adjust the view after building the window object
-render_camera(phi = 10, zoom = .7, theta = 120)
+render_camera(phi = 30, zoom = .7, theta = 120)
 
 ###---render high quality
 if (!dir.exists(glue("Day 5/{map}"))) {
@@ -134,9 +134,13 @@ img_ <- image_annotate(img_, glue("Elevation: {scales::label_comma()(elevation)}
 
 
 #inset plot
-countries <- spData::world 
+#Thanks to @osm_ua for pointing out that the spData country outline 
+#of Ukraine is not correct. Correcting with a file from GADM
+#countries <- spData::world 
 
-ukraine <- countries[countries$name_long=="Ukraine",]
+#ukraine <- countries[countries$name_long=="Ukraine",]
+
+ukraine <- st_read("./Day 5/hoverla/gadm41_UKR_0.shp")
 
 point = tibble(x = 24.500278
                , y = 48.16)
