@@ -13,7 +13,9 @@ library(magick)
 
 
 #Hoverla mountain in Ukraine
-#thank you https://github.com/DABrianC/rayshader_portraits/blob/main/R/portraits/bryce_canyon/render_graphic.R
+#thank you Spencer Schien, https://spencerschien.info/post/data_viz_how_to/high_quality_rayshader_visuals/
+#I also forked his rayshader_portraits github repo
+#https://github.com/DABrianC/rayshader_portraits/blob/main/R/portraits/bryce_canyon/render_graphic.R
 
 map <- "hoverla"
 
@@ -74,7 +76,7 @@ mat %>%
           background = "white") 
 
 # Use this to adjust the view after building the window object
-render_camera(phi = 30, zoom = .7, theta = 120)
+render_camera(phi = 10, zoom = .7, theta = 120)
 
 ###---render high quality
 # Ensure dir exists for these graphics
@@ -133,17 +135,29 @@ saveRDS(list(
 img <- image_read("./Day 5/hoverla/hoverla_ukraine_z10.png")
 
 #set text color
-text_color <- colors[2]
+text_color <- colors[[3]]
 
+#fonts
+library(showtext)
+library(extrafont)
+
+font_import(paths = "C:/USERS/BRIAN.CALHOON/APPDATA/LOCAL/MICROSOFT/WINDOWS/FONTS")
+load_showtext_fonts()
+font_add_google(name = "Fredericka the Great", family = "frederika")
+
+font_add(family = "frederika"
+         , regular = "C:/USERS/BRIAN.CALHOON/APPDATA/LOCAL/MICROSOFT/WINDOWS/FONTS/FREDERICKATHEGREAT-REGULAR.ttf")
+loadfonts()
+showtext_auto()
 img_ <- image_annotate(img, "Ukraine's Highest Point"
-                       #, font = ""
+                       , font = "Castellar"
                        , color = text_color
                        , size = 125
                        , gravity = "north"
                        , location = "+0+200")
 
 img_ <- image_annotate(img_, "Mount Hoverla", weight = 700
-                       #, font = ""
+                       , font = "Castellar"
                        , location = "+0+400"
                        , color = text_color
                        , size = 200
@@ -152,7 +166,7 @@ img_ <- image_annotate(img_, "Mount Hoverla", weight = 700
 elevation <- max(mat, na.rm = T)
 
 img_ <- image_annotate(img_, glue("Elevation: {scales::label_comma()(elevation)} m")
-                       #, font = "" 
+                       , font = "Castellar" 
                        , location = "+1200-1300"
                        , color = text_color
                        , size = 110
@@ -169,42 +183,46 @@ point = tibble(x = 24.500278
 
 spot <- st_buffer(st_as_sf(point, coords = c("x", "y")
                            , crs = 4326), 50000)
-text_color <- colors[length(colors)]
+
 
 
 loc_plot <- ggplot() + 
-  geom_sf(data = ukraine, fill = "transparent", color = colors[[3]], size = 0.2) + 
-  ggfx::with_outer_glow(geom_sf(data = spot, fill = NA, color = colors[2])) +
+  geom_sf(data = ukraine, fill = text_color, color = colors[[3]], size = 0.2) + 
+  ggfx::with_outer_glow(geom_sf(data = spot, fill = yellows[[3]], color = yellows[3])) +
   theme_void() + 
   coord_sf(crs = 4326)
 
 loc_plot
 ggsave(loc_plot, filename = glue("Day 5/hoverla_inset.png"), w = 4*1.5, h = 3*1.5)
 
+inset <- image_read("Day 5/hoverla_inset.png")
 
+img_comp <- image_composite(img_, inset
+                , offset = "+200+1200"
+                , gravity = "east")
 # Caption
-img_ <- image_annotate(img_, glue("Visualized by @DABrianC | #30DayMapChallenge", 
-                                  "Data from AWS Terrain Tiles and USGS") 
-                       #, font = "Cinzel Decorative"
+img_comp2 <- image_annotate(img_comp, glue("Visualized by @DABrianC | #30DayMapChallenge", 
+                                  " | Made with : #Rayshader & #Elevatr") 
+                       , font = "Castellar"
                        , location = "+0+50"
-                       , color = alpha(text_color, .5)
+                       , color = text_color
                        , size = 75
                        , gravity = "south")
 
 # Twitter
-#twitter <- fa("twitter", fill = text_color, fill_opacity = .5)
-#grid.newpage()
+#twitter <- fontawesome::fa("twitter", fill = text_color, fill_opacity = .5)
+#grid::grid.newpage()
 
-tmp <- tempfile()
-png(tmp, bg = "transparent")
-#grid.draw(read_svg(twitter))
-dev.off()
+#tmp <- tempfile()
+#png(tmp, bg = "transparent")
+#grid::grid.draw(svgtools::read_svg(twitter))
+#dev.off()
 
-tw <- image_read(tmp)
-tw <- image_scale(tw, "x75")
+#tw <- image_read(tmp)
+#tw <- image_scale(tw, "x75")
 
-img_ <- image_composite(img_, tw, gravity = "south",
-                        offset = "-530+65")
+#img_ <- image_composite(img_, tw, gravity = "south",
+#                        offset = "-530+65")
 
 
-image_write(img_, glue("Day 5/hoverla/hoverla_fully_annotated.png"))
+image_write(img_comp2, glue("Day 5/hoverla/hoverla_fully_annotated.png"))
