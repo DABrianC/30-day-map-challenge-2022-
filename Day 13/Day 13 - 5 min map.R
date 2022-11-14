@@ -6,7 +6,7 @@ library(rcartocolor)
 library(readxl)
 
 
-#borders of France
+#borders of France from gadm.org
 france <- st_read("./Day 13/gadm41_FRA_1.shp")
 
 #train stations in France
