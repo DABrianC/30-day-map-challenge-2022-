@@ -10,7 +10,7 @@ library(showtext)
 #some data from naturalearth
 coasts <- ne_coastline(returnclass = "sf")
 
-st_transform(coasts, crs = "ESRI:54032")
+coasts <- st_transform(coasts, crs = "ESRI:54032")
 
 #some minimal(ish) colors 
 
@@ -28,9 +28,9 @@ map <- tm_shape(coasts, projection = "ESRI:54032") +
   tm_lines(col = pal[[4]]
            , lwd = .25)
 
-mapped <- map +  tm_layout(main.title = "Day 15: Global coastlines"
+mapped <- map +  tm_layout(main.title = "Day 16: Global coastlines"
                  , main.title.position = "center"
-                 , main.title.size = 4
+                 , main.title.size = 2
                  , bg.color = pal[[7]]
                  , main.title.fontfamily = "montserrat"
                  , outer.bg.color = pal[[7]]
@@ -45,4 +45,7 @@ mapped <- map +  tm_layout(main.title = "Day 15: Global coastlines"
 
 mapped
 
-tmap_save(mapped, "./Day 16/minimal map.png")
+tmap_save(mapped, "./Day 16/minimal map.png"
+          , height = 5
+          , width = 5
+          , unit = "in")
