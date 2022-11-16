@@ -87,10 +87,10 @@ ggplot() +
                                           , color = pal[[7]])
         , legend.title = element_text(color = pal[[9]]
                                       , family = "frederika"
-                                      , size = 12)
+                                      , size = 16)
         , legend.text = element_text(color = pal[[9]]
                                      , family = "frederika"
-                                     , size = 12))
+                                     , size = 16))
 
 
 ggsave("./Day 11/Great Falls - red.png"
