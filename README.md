@@ -15,3 +15,5 @@ My repo for fun with [The 30 Day Map Challenge!!!](https://30daymapchallenge.com
 ![plot](https://github.com/DABrianC/30-day-map-challenge-2022-/blob/main/Day%2011/Great%20Falls%20-%20red.png)
 
 ![plot](https://github.com/DABrianC/30-day-map-challenge-2022-/blob/main/Day%2013/gares%20de%20france.png)
+
+![plot](https://github.com/DABrianC/30-day-map-challenge-2022-/blob/main/Day%2016/minimal%20map.png)
