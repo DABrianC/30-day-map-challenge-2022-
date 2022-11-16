@@ -35,7 +35,7 @@ ggplot() +
   coord_sf(xlim = c(bbox[[1]], bbox[[3]])
            , ylim = c(bbox[[2]], bbox[[4]])) +
   theme_void() +
-  labs(title = "5 min map: Gares de France"
+  labs(title = "Day 13: 5 min map: Gares de France"
        , subtitle = "Quickly made"
        , caption = "Data: data.gouv.fr | gadm.org\n
        Visualized by: @bcalhoon7")
