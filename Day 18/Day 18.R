@@ -56,14 +56,24 @@ rivers_mask <- mask(vect(france_rivers), mask = vect(france))
 #write this to disk because it took a long time to mask
 writeVector(rivers_mask, "./Day 18/france rivers.shp")
 
-
+rivers_mask2 <- rivers_mask |>
+  mutate(linesize = case_when(ORD_CLAS == 1 ~ 1
+                          , ORD_CLAS == 2 ~ .9
+                          , ORD_CLAS == 3 ~ .8
+                          , ORD_CLAS == 4 ~ .7
+                          , ORD_CLAS == 5 ~ .6
+                          , ORD_CLAS == 6 ~ .5
+                          , ORD_CLAS == 7 ~ .4
+                          , ORD_CLAS == 8 ~ .3
+                          , ORD_CLAS == 9 ~ .2))
 
 #Make the plot
 showtext_auto()
 ggplot()+
   ggfx::with_shadow(geom_sf(data = france, fill = "#F7FBFF")
               , color = "#F6FBFF") +
-  tidyterra::geom_spatvector(data = rivers_mask, aes(col = DIS_AV_CMS)) +
+  tidyterra::geom_spatvector(data = rivers_mask2, aes(col = DIS_AV_CMS
+                             , linewidth = linesize)) +
   coord_sf(xlim = c(bbox[[1]], bbox[[3]])
            , ylim = c(bbox[[2]], bbox[[4]])) +
   scale_color_gradient(low = "#DEEBF7"
