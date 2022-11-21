@@ -98,3 +98,45 @@ ggsave("./Day 11/Great Falls - red.png"
        , width = 5
        , height = 5
        , units = "in")
+
+
+#### testing plot_gg() on it
+#I didn't save this plot, but it's kind of neat
+library(rayshader)
+
+showtext_auto()
+plot_gg(ggplot() +
+  geom_sf(data = tan, aes(geometry = geometry
+                          , fill = max
+                          , col = max))+
+  scale_fill_gradientn(colors = pal
+                       , name = "Elevation (meters)") +
+  scale_color_gradientn(colors = pal
+                        , guide= "none") +
+  geom_sf(data = center, aes(geometry = geometry)
+          , linewidth = 1.5
+          , col = pal[[9]]
+          , fill = NA
+  ) +
+  theme_void() +
+  labs(title = "Day 11: Great Falls Park, VA"
+       , caption = "Data: AWS Terrain Tiles \n Visualized by: @bcalhoon7") +
+  theme(plot.title = element_text(color = pal[[9]]
+                                  , family = "frederika"
+                                  , size = 38)
+        , plot.caption = element_text(color = pal[[9]]
+                                      , family = "frederika"
+                                      , size = 16)
+        , axis.text = element_blank()
+        , axis.title = element_blank()
+        , axis.ticks = element_blank()
+        , plot.background =  element_blank()
+        , panel.background = element_rect(fill = pal[[7]]
+                                          , color = pal[[7]])
+        , legend.title = element_text(color = pal[[9]]
+                                      , family = "frederika"
+                                      , size = 16)
+        , legend.text = element_text(color = pal[[9]]
+                                     , family = "frederika"
+                                     , size = 16))
+)
