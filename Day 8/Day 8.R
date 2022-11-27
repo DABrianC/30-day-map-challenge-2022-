@@ -265,7 +265,7 @@ img_comp <- image_composite(img_title4, inset
 
 # Caption
 img_comp2 <- image_annotate(img_comp, glue("Visualized by @bcalhoon7 | #30DayMapChallenge", 
-                                          " | Made with : #Rayshader & #SRTM tiles") 
+                                          " | Made with : #Rayshader & #SRTM tiles & OpenStreetMap Contributors") 
                           , font = font
                          , location = "+0+50"
                         , color = "#802729"
