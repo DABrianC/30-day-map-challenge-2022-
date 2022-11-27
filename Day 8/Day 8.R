@@ -1,134 +1,177 @@
-#Day 8 - OpenStreetMap
+options(rgl.useNULL = FALSE)
 
-library(osmdata)
 library(tidyverse)
-library(rjson)
-library(jsonlite)
 library(sf)
-library(lidR)
-library(elevatr)
+library(raster)
 library(rayshader)
-library(nationalparkcolors)
+library(rayimage)
+library(osmdata)
+library(elevatr)
 library(glue)
+library(magick)
+library(nationalparkcolors)
 
-#bounding box for Annecy Lake more or less
-bbox <- get_bbox(c(6.1081, 45.7795, 6.2533, 45.9148))
+###Annecy Lake------
 
-buildings <- st_read("./Day 8/annecy.geojson", drivers = "geojson")
+#topography files downloaded from https://dwtkns.com/srtm30m/
+background <- raster("./data/N45E006.hgt")
 
-#download osm data
-cycle <- opq(bbox) |>
-  add_osm_feature(key = "route"
-                  , value = "bicycle") |>
-  osmdata_sf()
-
-water <- opq(bbox) |>
-  add_osm_feature(key = "water"
-                  , value = c("canal", "lake", "river")) |>
-  osmdata_sf()
-
-z<- 14
-map <- "annecy"
-
-elev <- get_elev_raster(water, z = z, crs = crs)
-
-elev <- crop(elev, bbox)
-
-#set crs to same as elev
-cycle <- sf::st_transform(cycle$osm_multilines, crs = crs(elev))
-
-water <- sf::st_transform(water$osm_multipolygons, crs = crs(elev))
+mat <- raster_to_matrix(background)
 
 
-buildings <- sf::st_transform(buildings, crs = crs(elev))
-#test to see if all shapes align now that they are transformed
+#colors 
+#set text color
+
+palette <- park_palette("GeneralGrant", n = 8)
+
+colors <- "grant"
+pal <- "grant"
+text_color <- "#802729"
+#Testing what I've downloaded to see that it includes the correct 
+# location.
+mat|>
+  height_shade() %>% 
+  add_overlay(sphere_shade(mat, texture = "desert", 
+                           zscale=4, colorintensity = 5), alphalayer=0.5) %>%
+  add_shadow(lamb_shade(mat,zscale = 6),0) %>%
+  add_shadow(ambient_shade(mat), 0) %>%
+  add_shadow(texture_shade(mat,detail=8/10
+                           ,contrast=9
+                           ,brightness = 11), 0.1) %>%
+  plot_map()
 
 
-plot(elev)
-plot(st_geometry(water), add = T, col = "blue")
-plot(st_geometry(cycle), add = T, col = "red", ext = extent(water))
-#convert elev raster to a matrix
-mat <- raster_to_matrix(elev)
+bbox <- c(6.1081, 45.7795, 6.2533, 45.9148)
 
+extent_zoomed = extent(bbox[1], bbox[3], bbox[2], bbox[4])
 
-w <- nrow(mat)
-h <- ncol(mat)
+annecy_zoomed = crop(background, extent_zoomed)
+
+annecy_zoomed_mat = raster_to_matrix(annecy_zoomed)
+
+#dimensions for the window
+w <- nrow(annecy_zoomed_mat)
+h <- ncol(annecy_zoomed_mat)
 
 wr <- w / max(c(w,h))
 hr <- h / max(c(w,h))
 
 
-colors <- park_palette("ArcticGates", 6)
-
-pal <- "ArcticGates"
-
-#plot and work through the kinks here
 rgl::rgl.close()
-mat |>
-  height_shade() |>
-  add_overlay(generate_polygon_overlay(geometry = water
-                                       , extent = attr(elev, "extent")
-                                       , heightmap = elev
-                                      , palette = colors[[2]]
-                                       , linewidth = NA)
-                                       ) |>
-  add_overlay(generate_line_overlay(geometry = cycle
-                                    , extent = attr(elev, "extent")
-                                    , heightmap = elev
-                                    , color = colors[[6]]
-                                    , linewidth = 8)
-                                    ) |>
- plot_3d(heightmap = mat 
-          , solid = FALSE 
-          , z = 2
-          , shadowdepth = 50
-          , windowsize = c(800*wr,800*hr) 
-          , phi = 90
-          , zoom = 1 
-          , theta = 0 
-          , background = "white") 
+base_map = annecy_zoomed_mat %>% 
+  height_shade() %>%
+  add_overlay(sphere_shade(annecy_zoomed_mat, texture = "desert", colorintensity = 5), alphalayer=0.5) %>%
+  add_shadow(lamb_shade(annecy_zoomed_mat), 0.5) %>%
+  add_shadow(ambient_shade(annecy_zoomed_mat),0.5) %>% 
+  add_shadow(texture_shade(annecy_zoomed_mat,detail=8/10,contrast=9,brightness = 12), 0.1) #%>% 
 
-render_label(mat, x = 1475, y = 1400, z = 12000,
-              zscale = 50, text = "Lac"
-             , textsize = 1, textcolor = "darkblue"
-             , family = "sans", alpha = .6, 
-             linecolor = colors[[2]], clear_previous = T)
-render_label(mat, x = 1550, y = 1500, z = 12000,
-             zscale = 50, text = "d'Annecy"
-             , textsize = 1, textcolor = "darkblue"
-             , family = "sans", alpha = .6
-             , linecolor = colors[[2]])
-render_label(mat, x = 525, y = 450, z = 20000
-             , zscale = 50, text = "Annecy"
-             , textsize = 1, textcolor = "black"
-             , family = "sans", alpha = .6
-             , linewidth = 1, linecolor = "black")
-render_label(mat, x = 1800, y = 1200, z = 20000
-             , zscale = 50, text = "Veyrier-du-lac"
-             , textsize = 1, textcolor = "black"
-             , family = "sans", alpha = .6
-             , linewidth = 1, linecolor = "black")
+#download osm data
+#bicycle paths
+cycle <- opq(bbox) |>
+  add_osm_feature(key = "route"
+                  , value = "bicycle") |>
+  osmdata_sf()
 
-# Use this to adjust the view after building the window object
-render_camera(phi = 45, zoom = .7, theta = 25, fov = 60)
-render_snapshot()
+#foot paths
+foot <- opq(bbox) |>
+  add_osm_feature(key = "route"
+                  , value = c("foot", "hiking", "running")) |>
+  osmdata_sf()
 
+#water
+water <- opq(bbox) |>
+  add_osm_feature(key = "water"
+                  , value = c("canal", "lake", "river")) |>
+  osmdata_sf()
+
+#buildings
+buildings <- opq(bbox) |>
+  add_osm_feature(key = "building") |>
+  osmdata_sf()
+
+#transforming the relevant parts of the OSM data
+annecy_cycle <- st_transform(cycle$osm_multilines, crs = crs(background))
+
+annecy_lake <- st_transform(water$osm_multipolygons, crs = crs(background))
+
+annecy_river <- st_transform(water$osm_lines, crs = crs(background))
+
+annecy_foot <- st_transform(foot$osm_multilines, crs = crs(background))
+
+annecy_building <- st_transform(buildings$osm_multipolygons
+                                , crs = crs(background))
+annecy_building2 <- st_transform(buildings$osm_polygons
+                                 , crs = crs(background))
+
+#testing the different objects for cycle paths, hiking paths, water, and buildings
+ggplot() +
+  geom_sf(data = annecy_cycle, color = "red", alpha = .6) +
+  geom_sf(data = annecy_lake, fill = "blue", alpha = .6) +
+  geom_sf(data = annecy_river, color = "blue", alpha = .6) +
+  geom_sf(data = annecy_foot, color = "brown", alpha = .6) +
+  geom_sf(data = annecy_building, color = "grey", alpha = .6) +
+  geom_sf(data = annecy_building2, color = "darkgrey", alpha = .6)+
+  theme(legend.position = "none") +
+  labs(title = "Open Street Map `route/bicycle` attribute in Annecy region")
+
+rgl::rgl.close()
+base_map |>
+  add_overlay(generate_polygon_overlay(annecy_lake, extent = extent_zoomed
+                                       , heightmap = annecy_zoomed_mat
+                                       , palette = "skyblue2"), alphalayer = .7) |>
+  add_overlay(generate_polygon_overlay(annecy_building, extent = extent_zoomed
+                                       , heightmap = annecy_zoomed_mat
+                                       , palette = "lightgrey"), alphalayer = .6) |>
+  add_overlay(generate_polygon_overlay(annecy_building2, extent = extent_zoomed
+                                       , heightmap = annecy_zoomed_mat
+                                       , palette = "lightgrey"), alphalayer = .6) |>
+  add_overlay(generate_line_overlay(annecy_river, extent = extent_zoomed
+                                    , heightmap = annecy_zoomed_mat
+                                    , color = "skyblue2"), alphalayer = .7)|> 
+  add_overlay(generate_line_overlay(annecy_cycle,extent = extent_zoomed,
+                                    linewidth = 3, color="black"
+                                    , heightmap = annecy_zoomed_mat)) |>
+  add_overlay(generate_line_overlay(annecy_cycle,extent = extent_zoomed,
+                                    linewidth = 2, color= "#F3AE6D",
+                                    heightmap = annecy_zoomed_mat)) |>
+  add_overlay(generate_line_overlay(annecy_foot, extent = extent_zoomed
+                                    , heightmap = annecy_zoomed_mat
+                                    , color = "#C9DACA", lty = 3
+                                    , linewidth = 1)) |>
+  plot_3d(heightmap = annecy_zoomed_mat, 
+          solid = FALSE, 
+          z = 12,
+          shadowdepth = 50,
+          windowsize = c(800*wr,800*hr), 
+          phi = 90, 
+          zoom = 1, 
+          theta = 0, 
+          background = "#516888") 
+
+#adjust the view
+render_camera(phi = 35, zoom = .8, theta = 20)
+
+map <- "annecy"
+
+z <- 17
+#Now to save it as a highquality image
 ###---render high quality
-if (!dir.exists(glue("Day 8/{map}"))) {
-  dir.create(glue("Day 8/{map}"))
+if (!dir.exists(glue("./Annecy/{map}"))) {
+  dir.create(glue("./Annecy/{map}"))
 }
 
-outfile <- stringr::str_to_lower(glue("./Day 8/{map}/{map}_{pal}_z{z}.png"))
+outfile <- stringr::str_to_lower(glue("./annecy/{map}/{map}_{pal}_z{z}.png"))
 
 # Now that everything is assigned, save these objects so we
-# can use then in our markup script
+# can use them in our markup script
 saveRDS(list(
   map = map,
   pal = pal,
   z = z,
   colors = colors,
   outfile = outfile
-), "Day 8/annecy/annecy.rds")
+), "Annecy/annecy/header.rds")
+
 
 {
   png::writePNG(matrix(1), outfile)
@@ -140,14 +183,9 @@ saveRDS(list(
     samples = 300, 
     light = FALSE, 
     interactive = FALSE,
-    environment_light = "./Day 5/phalzer_forest_01_4k.hdr",
+    environment_light = "./phalzer_forest_01_4k.hdr",
     intensity_env = 1.75,
     rotate_env = 90,
-    clamp_value = 10,
-    line_radius = 1,
-    text_size = 18,
-    text_offset = c(0,12,0),
-    clear = TRUE,
     width = round(6000 * wr), height = round(6000 * hr)
   )
   end_time <- Sys.time()
@@ -155,9 +193,85 @@ saveRDS(list(
 }
 
 
-ggplot()+
-  geom_sf(data = water
-          , fill = "steelblue") +
-  geom_sf(data = cycle
-          , col = "red")
+#Annotate the img
+img <- image_read("./Day 8/annecy/annecy/annecy_grant_z17.png")
+
+#set text color
+
+pal <- park_palette("GeneralGrant", n = 8)
+
+text_color <- pal[[8]]
+
+#set the font
+font <- "Bradley Hand ITC"
+
+img_ <- image_annotate(img, "Day 8: Lac d'Annecy"
+                       , font = font
+                       , color = text_color
+                       , size = 300
+                       , gravity = "north"
+                       , location = "+0+200"
+                       )
+
+img_title2 <- image_annotate(img_, "Cycling around the lake"
+                             , weight = 700
+                             , font = font
+                             , location = "+0+550"
+                             , color = text_color
+                             , size = 200
+                             , gravity = "north")
+
+img_title3 <- image_annotate(img_title2, "or"
+                             , font = font
+                             , location = "+0+750"
+                             , color = text_color
+                             , size = 200
+                             , gravity = "north")
+
+img_title4 <- image_annotate(img_title3, "hiking in the mountains?"
+                             , font = font
+                             , color = text_color
+                             , location = "+0+950"
+                             , size = 200
+                             , gravity = "north")
+
+#inset map
+france <- st_read("./Day 13/gadm41_FRA_1.shp")
+
+point = tibble(x = 6.10
+              , y = 45.51)
+
+spot <- st_buffer(st_as_sf(point, coords = c("x", "y")
+                         , crs = 4326), 15000)
+
+
+
+loc_plot <- ggplot() + 
+ ggfx::with_shadow(geom_sf(data = france, fill = pal[[7]], color = "white", size = 0.2)) + 
+ggfx::with_outer_glow(geom_sf(data = spot, fill = pal[[1]], color = pal[1])) +
+theme_void() + 
+coord_sf(crs = 4326)
+
+
+ggsave(loc_plot, filename = glue("Day 8/annecy_inset.png"), w = 4*1.5, h = 3*1.5)
+
+inset <- image_read("Day 8/annecy_inset.png")
+
+img_comp <- image_composite(img_title4, inset
+                           , offset = "+0+1800"
+                          , gravity = "west"
+                          )
+
+
+# Caption
+img_comp2 <- image_annotate(img_comp, glue("Visualized by @bcalhoon7 | #30DayMapChallenge", 
+                                          " | Made with : #Rayshader & #SRTM tiles") 
+                          , font = font
+                         , location = "+0+50"
+                        , color = "#802729"
+                        , size = 75
+                      , gravity = "south")
+
+#Full size image not tracked - a condensed version is saved instead
+image_write(img_comp2, glue("Day 8/annecy/annecy/annecy_fully_annotated.png"))
 
